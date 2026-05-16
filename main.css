@@ -212,7 +212,7 @@ background-color:#fafafa;
     
     /* Double-width unfolding animation transition mechanics */
     transition: 
-        max-width 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+        max-width 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
         transform 0.4s ease, 
         box-shadow 0.4s ease;
 }
@@ -245,7 +245,7 @@ background-color:#fafafa;
     width: 100%;
     height: auto;
     background: #ffffff;
-}
+} delta
 
 /* Side-by-Side Folding Page Spread Panels */
 .left-panel, 
@@ -264,11 +264,16 @@ background-color:#fafafa;
     justify-content: center;
 }
 
+/* Hidden by default until the parent card is fully expanded */
 .inner-content {
     line-height: normal;
     text-align: center;
     padding: 2.5rem;
     width: 100%;
+    opacity: 0;
+    transform: translateY(5px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition-delay: 0s;        /* Reset transition delay when closed */
 }
 
 /* Typography styles matching the template constraints safely */
@@ -301,12 +306,13 @@ background-color:#fafafa;
 
 .card.active #opened {
     display: flex !important;    /* Forces panels side-by-side */
-    animation: fadeSpreadPanel 0.4s ease forwards;
 }
 
-@keyframes fadeSpreadPanel {
-    from { opacity: 0; }
-    to { opacity: 1; }
+/* Reveal the text inside the panel strictly AFTER the card finishes expanding wide */
+.card.active .inner-content {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.35s;     /* Delays text until physical expansion layout is settled */
 }
 
 /* Isolated Fixed Screen Confetti Particles styling */
@@ -340,346 +346,7 @@ background-color:#fafafa;
         box-shadow: inset 0 15px 25px rgba(0, 0, 0, 0.015);
         padding: 3.5rem 1rem;
     }
-}@import url(fontawesome-all.min.css);
-
-html,
-body,
-div,
-span,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-a{
-
-margin:0;
-padding:0;
-box-sizing:border-box;
-
-}
-
-
-body{
-
-background:#fff;
-
-font-family:
-Arial,
-Helvetica,
-sans-serif;
-
-color:#999;
-
-overflow:hidden;
-
-}
-
-
-body,
-input{
-
-font-size:16pt;
-
-}
-
-
-#header{
-
-min-height:100vh;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-padding:2rem;
-
-}
-
-
-.content{
-
-text-align:center;
-
-max-width:850px;
-
-}
-
-
-.tag{
-
-display:inline-block;
-
-padding:
-
-.6rem
-1rem;
-
-border:
-
-1px solid
-#e6e6e6;
-
-border-radius:
-
-999px;
-
-font-size:
-
-.7rem;
-
-letter-spacing:
-
-.3em;
-
-margin-bottom:
-
-2rem;
-
-}
-
-
-h1{
-
-font-size:
-
-clamp(
-4rem,
-10vw,
-8rem
-);
-
-color:
-
-#828282;
-
-margin-bottom:
-
-.25em;
-
-line-height:
-
-1;
-
-}
-
-
-p{
-
-margin:
-
-0 auto
-2rem;
-
-max-width:
-
-600px;
-
-line-height:
-
-1.8;
-
-}
-
-
-.button{
-
-display:inline-block;
-
-padding:
-
-1rem
-2rem;
-
-border:
-
-1px solid
-#e6e6e6;
-
-border-radius:
-
-999px;
-
-text-decoration:none;
-
-color:inherit;
-
-background:transparent;
-
-cursor:pointer;
-
-transition:
-background-color
-.2s,
-border-color
-.2s;
-
-}
-
-.button:hover{
-
-border-color:#b2b2b2;
-
-background-color:#fafafa;
-
-}
-
-
-/* =========================================
-   A4 GREETING CARD (STABLE UNFOLD SPREAD)
-   ========================================= */
-
-.card {
-    background: #ffffff;
-    width: 100%;
-    max-width: 400px;            /* Closed: standard width of one A4 panel */
-    position: relative;
-    
-    /* Paper aesthetics */
-    border: 1px solid rgba(0, 0, 0, 0.08); 
-    border-radius: 6px;          /* Sharp, realistic paper-cut cardstock edge */
-    
-    /* Premium paper depth drop shadows */
-    box-shadow: 
-        0 1px 3px rgba(0, 0, 0, 0.05),
-        0 10px 30px rgba(0, 0, 0, 0.06), 
-        0 20px 40px rgba(0, 0, 0, 0.03);
-    
-    cursor: pointer;
-    overflow: hidden;
-    
-    /* Smooth width expansion transition on open */
-    transition: 
-        max-width 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
-        transform 0.4s ease, 
-        box-shadow 0.4s ease;
-}
-
-/* Card hover lift actions (Only applies when card is closed) */
-.card:not(.active):hover {
-    transform: translateY(-5px);
-    box-shadow: 
-        0 1px 2px rgba(0, 0, 0, 0.05),
-        0 20px 40px rgba(0, 0, 0, 0.12), 
-        0 30px 60px rgba(0, 0, 0, 0.05);
-}
-
-#closed {
-    width: 100%;
-    line-height: 0;
-}
-
-.card-front-image {
-    width: 100%;
-    height: auto;
-    display: block;
-    user-select: none;
-    -webkit-user-drag: none;
-}
-
-/* Wide Open Canvas Mechanics */
-#opened {
-    display: none;
-    width: 100%;
-    height: auto;
-    background: #ffffff;
-}
-
-/* Side-by-Side Folding Panels */
-.left-panel, 
-.right-panel {
-    width: 50%;
-    line-height: 0;
-}
-
-/* Adds a subtle realistic inner shadow spine to the center fold */
-.right-panel {
-    border-left: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: inset 12px 0 20px rgba(0, 0, 0, 0.015);
-    background: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.inner-content {
-    line-height: normal;
-    text-align: center;
-    padding: 2rem;
-    width: 100%;
-}
-
-/* Interior Typography Constraints */
-.card h1 {
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    color: #5c5c5c;
-    margin-bottom: 0.4em;
-    font-weight: normal;
-}
-
-.card p {
-    font-size: clamp(0.9rem, 2vw, 1.15rem);
-    color: #999999;
-    max-width: 90%;
-    margin-bottom: 0;
-    line-height: 1.6;
-}
-
-/* Unfolded Active States */
-.card.active {
-    max-width: 800px;            /* Smoothly doubles card size width */
-    cursor: default;
-    transform: none !important;
-    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.06);
-}
-
-.card.active #closed {
-    display: none;
-}
-
-.card.active #opened {
-    display: flex;                /* Aligns left-panel and right-panel side-by-side */
-    animation: fadeContentIn 0.5s ease forwards;
-}
-
-@keyframes fadeContentIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* Fixed Background Canvas Confetti Elements */
-.particle {
-    position: fixed;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-}
-
-/* Responsive constraints on mobile/tablet viewports */
-@media screen and (max-width: 768px) {
-    #header {
-        padding: 1rem;
-    }
-    .card.active {
-        max-width: 400px;        /* Returns to single column flow if screen is too narrow */
-    }
-    .card.active #opened {
-        flex-direction: column;  /* Stack pages vertically if screens are too compact */
-    }
-    .left-panel, 
-    .right-panel {
-        width: 100%;
-    }
-    .right-panel {
-        border-left: none;
-        border-top: 1px solid rgba(0, 0, 0, 0.05);
-        box-shadow: inset 0 12px 20px rgba(0, 0, 0, 0.015);
-        padding: 3rem 1rem;
+    .card.active .inner-content {
+        transition-delay: 0.2s;  /* Shorter transition time window constraint on small displays */
     }
 }
