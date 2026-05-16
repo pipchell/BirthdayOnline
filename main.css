@@ -194,7 +194,7 @@ background-color:#fafafa;
 .card {
     background: #ffffff;
     width: 100%;
-    max-width: 400px;            /* Closed single A4 cover panel width */
+    max-width: 400px;            /* Closed single A4 cover layout panel width */
     position: relative;
     
     /* Paper stock styling */
@@ -237,24 +237,27 @@ background-color:#fafafa;
     display: block;
     user-select: none;
     -webkit-user-drag: none;
-} delta
+}
 
 /* Wide Open Canvas Mechanics */
 #opened {
     display: none;
     width: 100%;
     background: #ffffff;
-    align-items: stretch;        /* Forces both halves to strictly match heights */
+    
+    /* CSS Grid forces identical matching heights for both sections */
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
 }
 
 /* Side-by-Side Folding Page Spread Panels */
 .left-panel {
-    width: 50%;
+    width: 100%;
     line-height: 0;
 }
 
 .right-panel {
-    width: 50%;
+    width: 100%;
     border-left: 1px solid rgba(0, 0, 0, 0.06);
     box-shadow: inset 15px 0 25px rgba(0, 0, 0, 0.015);
     background: #ffffff;
@@ -276,16 +279,16 @@ background-color:#fafafa;
 
 /* Typography styles matching the template constraints safely */
 .card h1 {
-    font-size: clamp(1.6rem, 4vw, 2.5rem);
+    font-size: clamp(1.4rem, 3.5vw, 2.4rem);
     color: #555555;
     margin-bottom: 0.5em;
     font-weight: normal;
 }
 
 .card p {
-    font-size: clamp(0.95rem, 2vw, 1.15rem);
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
     color: #999999;
-    max-width: 90%;
+    max-width: 95%;
     margin-bottom: 0;
     line-height: 1.6;
 }
@@ -303,8 +306,8 @@ background-color:#fafafa;
 }
 
 .card.active #opened {
-    display: flex !important;    /* Forces panels side-by-side */
-}
+    display: grid !important;    /* Activates side-by-side grid spread layout */
+} delta
 
 /* Reveal the text inside the panel strictly AFTER the card finishes expanding wide */
 .card.active .inner-content {
@@ -332,11 +335,7 @@ background-color:#fafafa;
         max-width: 400px;        /* Soft collapse back to single panel width format if viewport breaks */
     }
     .card.active #opened {
-        flex-direction: column;  /* Stack columns cleanly into simple lists */
-    }
-    .left-panel, 
-    .right-panel {
-        width: 100%;
+        grid-template-columns: 1fr; /* Switch from side-by-side to stacked view */
     }
     .right-panel {
         border-left: none;
