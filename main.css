@@ -7,7 +7,7 @@
     box-sizing: border-box;
 }
 
-/* SCROLL FIX */
+/* SCROLL */
 html, body {
     height: auto;
     min-height: 100%;
@@ -44,190 +44,37 @@ body {
     cursor: pointer;
 }
 
-/* EXPAND ONLY LAYOUT, NOT IMAGE */
+/* EXPAND ONLY SIZE */
 .card.active {
     max-width: 900px;
 }
 
 /* =========================
-   CLOSED (FRONT IMAGE FIXED)
+   CLOSED STATE (FIX)
    ========================= */
 #closed {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
+    display: block;
 }
 
 #closed img {
     width: 100%;
-    max-height: 350px;     /* IMPORTANT: stops A4 blow-up */
-    object-fit: cover;
+    height: auto;
     display: block;
-}
-
-/* =========================
-   OPEN AREA (ONLY THIS CHANGES)
-   ========================= */
-#opened {
-    display: none;
-    width: 100%;
-}
-
-.card.active #opened {
-    display: flex;
-}
-
-/* PANELS */
-.left-panel,
-.right-panel {
-    width: 50%;
-}
-
-/* LEFT INSIDE IMAGE (SECOND COPY) */
-.left-panel {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #fff;
-}
-
-.left-panel img {
-    width: 100%;
-    max-height: 70vh;
     object-fit: contain;
 }
 
-/* RIGHT SIDE */
-.right-panel {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-left: 1px solid rgba(0,0,0,0.1);
-    background: #fff;
+/* IMPORTANT: FORCE HIDE */
+.card.active #closed {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
 }
 
-/* TEXT */
-.inner-content {
-    text-align: center;
-    padding: 20px;
-
-    opacity: 0;
-    transform: translateY(10px);
-    transition: 0.6s ease;
-}
-
-/* DELAYED SHOW */
-.card.active.show-text .inner-content {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* TYPOGRAPHY */
-.card h1 {
-    font-size: 2rem;
-    margin-bottom: 10px;
-    color: #555;
-    font-weight: normal;
-}
-
-.card p {
-    font-size: 1rem;
-    color: #999;
-    line-height: 1.6;
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-    #header {
-        flex-direction: column;
-        padding: 1rem;
-    }
-
-    .card.active #opened {
-        flex-direction: column;
-    }
-
-    .left-panel,
-    .right-panel {
-        width: 100%;
-    }
-
-    .right-panel {
-        border-left: none;
-        border-top: 1px solid rgba(0,0,0,0.1);
-        padding: 2rem 1rem;
-    }
-}@import url(fontawesome-all.min.css);
-
-/* RESET */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* SCROLL FIX (hard override) */
-html, body {
-    height: auto;
-    min-height: 100%;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-}
-
-/* BODY */
-body {
-    background: #fff;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #999;
-    font-size: 16pt;
-}
-
-/* TOP TEXT */
-p {
-    text-align: center;
-    margin-top: 10px;
-}
-
-/* CENTER LAYOUT */
-#header {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
-}
-
-/* CARD */
-.card {
-    background: #fff;
-    width: 100%;
-    max-width: 450px;
-    border: 1px solid rgba(0,0,0,0.08);
-    border-radius: 6px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    overflow: hidden;
-    cursor: pointer;
-    transition: 0.4s ease;
-}
-
-.card.active {
-    max-width: 900px;
-}
-
-/* CLOSED */
-#closed {
-    width: 100%;
-    line-height: 0;
-}
-
-#closed img {
-    width: 100%;
-    display: block;
-}
-
-/* OPEN AREA */
+/* =========================
+   OPEN STATE
+   ========================= */
 #opened {
     display: none;
     width: 100%;
@@ -243,23 +90,19 @@ p {
     width: 50%;
 }
 
-/* =========================
-   IMAGE FIX (MAIN FIX HERE)
-   ========================= */
+/* LEFT IMAGE */
 .left-panel {
     display: flex;
     align-items: center;
     justify-content: center;
     background: #fff;
-    overflow: hidden;
 }
 
-/* FIXED IMAGE BEHAVIOUR */
 .left-panel img {
     width: 100%;
     height: auto;
-    max-height: 70vh;     /* prevents A4 blow-up */
-    object-fit: contain;  /* keeps full image visible */
+    max-height: 70vh;
+    object-fit: contain;
     display: block;
 }
 
@@ -269,21 +112,20 @@ p {
     align-items: center;
     justify-content: center;
     border-left: 1px solid rgba(0,0,0,0.1);
-    overflow: hidden;
     background: #fff;
 }
 
 /* TEXT */
 .inner-content {
-    padding: 20px;
     text-align: center;
+    padding: 20px;
 
     opacity: 0;
     transform: translateY(10px);
     transition: 0.6s ease;
 }
 
-/* SHOW TEXT AFTER DELAY */
+/* SHOW TEXT */
 .card.active.show-text .inner-content {
     opacity: 1;
     transform: translateY(0);
@@ -323,9 +165,5 @@ p {
         border-left: none;
         border-top: 1px solid rgba(0,0,0,0.1);
         padding: 2rem 1rem;
-    }
-
-    .left-panel img {
-        max-height: 300px;
     }
 }
