@@ -54,7 +54,7 @@ justify-content:center;
 
 align-items:center;
 
-padding:3rem;
+padding:2rem;
 
 }
 
@@ -188,61 +188,59 @@ background-color:#fafafa;
 
 
 /* =========================================
-   REAL PHYSICAL PAPER CARD STYLING
+   A4 PAPER CARD COMPONENT
    ========================================= */
 
 .card {
     background: #ffffff;
     width: 100%;
-    max-width: 440px;            /* Standard portrait greeting card width */
-    height: 580px;               /* Fixed container height to prevent shifting */
+    max-width: 400px;            /* Contained, natural card sizing on desktop */
     position: relative;
     
-    /* Paper aesthetics */
-    border: 1px solid rgba(0, 0, 0, 0.06); 
-    border-radius: 14px;         /* Smooth premium cut cardstock corners */
+    /* Paper Cardstock Aesthetics */
+    border: 1px solid rgba(0, 0, 0, 0.08); 
+    border-radius: 8px;          /* Slight, clean rounding common with heavy stock card cuts */
     
-    /* Multi-layered shadows to mimic ambient occlusion on real paper */
+    /* Realistic premium paper depth shadows */
     box-shadow: 
         0 1px 3px rgba(0, 0, 0, 0.05),
         0 10px 30px rgba(0, 0, 0, 0.06), 
-        0 20px 50px rgba(0, 0, 0, 0.04);
+        0 20px 40px rgba(0, 0, 0, 0.03);
     
     cursor: pointer;
     transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
-    overflow: hidden;            /* Ensures front image perfectly adheres to borders */
+    overflow: hidden;            /* Ensures internal pieces match the paper radius */
 }
 
-/* Hover lift effect for the physical card container */
+/* Tactile bounce/lift effect on hover */
 .card:hover {
     transform: translateY(-6px);
     box-shadow: 
-        0 1px 3px rgba(0, 0, 0, 0.05),
-        0 20px 45px rgba(0, 0, 0, 0.10), 
-        0 30px 70px rgba(0, 0, 0, 0.06);
+        0 1px 2px rgba(0, 0, 0, 0.05),
+        0 20px 40px rgba(0, 0, 0, 0.12), 
+        0 30px 60px rgba(0, 0, 0, 0.05);
 }
 
-/* Cover / Front Image configurations */
 #closed {
     width: 100%;
-    height: 100%;
+    line-height: 0;              /* Removes inline white-space gaps below images */
 }
 
+/* Perfect handling for A4 front.png */
 .card-front-image {
     width: 100%;
-    height: 100%;
-    object-fit: cover;           /* Ensures your artwork fills the cover space seamlessly */
+    height: auto;                /* Allows height to dynamically follow A4 proportions perfectly */
     display: block;
     user-select: none;
     -webkit-user-drag: none;
 }
 
-/* Inside Card Content Configurations */
+/* Inside Layout (Revealed upon state toggle) */
 #opened {
     display: none;
     width: 100%;
-    height: 100%;
-    padding: 3.5rem 2.5rem;
+    aspect-ratio: 1 / 1.414;     /* Forces the inside background to match the exact A4 layout shape */
+    padding: 3rem 2rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -250,26 +248,25 @@ background-color:#fafafa;
     background: #ffffff;
 }
 
-/* Adjust inside titles to look hand-crafted and elegant */
+/* Typography containment fixes for inside card */
 .card h1 {
-    font-size: clamp(2.4rem, 7vw, 3.6rem);
-    color: #555555;
-    margin-bottom: 0.5em;
-    font-weight: normal;
+    font-size: clamp(2.2rem, 7vw, 3.4rem);
+    color: #5c5c5c;
+    margin-bottom: 0.4em;
 }
 
 .card p {
-    font-size: 1.15rem;
-    color: #8c8c8c;
-    max-width: 95%;
-    margin-bottom: 2.5rem;
+    font-size: 1.1rem;
+    color: #999999;
+    max-width: 90%;
+    margin-bottom: 2rem;
 }
 
-/* Open transitions and reveal sequences */
+/* Card Interaction Mechanics */
 .card.active {
     cursor: default;
-    transform: none;
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.05); /* Settles back down gently when open */
+    transform: none !important;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.04);
 }
 
 .card.active #closed {
@@ -278,13 +275,13 @@ background-color:#fafafa;
 
 .card.active #opened {
     display: flex;
-    animation: revealPaperContent 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    animation: revealPaperCard 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
-@keyframes revealPaperContent {
+@keyframes revealPaperCard {
     from {
         opacity: 0;
-        transform: scale(0.97);
+        transform: scale(0.98);
     }
     to {
         opacity: 1;
@@ -292,7 +289,7 @@ background-color:#fafafa;
     }
 }
 
-/* Confetti styling particles */
+/* Particle styling fallback */
 .particle {
     position: fixed;
     width: 8px;
@@ -300,4 +297,14 @@ background-color:#fafafa;
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
+}
+
+/* Graceful scalability on mobile viewports */
+@media screen and (max-width: 440px) {
+    #header {
+        padding: 1.5rem;
+    }
+    .card {
+        max-width: 100%;         /* Seamless edge contraction on small phone screens */
+    }
 }
