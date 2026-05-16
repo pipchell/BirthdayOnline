@@ -6,7 +6,7 @@
 - Give it a name
 
 ## Step One:
-- Create a suitable A4 image for the from of your card
+- Create a suitable A4 image for the front of your card
 - Create a suitable icon for the browser window
 
 ## Step Two:
