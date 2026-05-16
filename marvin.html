@@ -1,9 +1,156 @@
-<div class="card">
-  <img src="https://raw.githubusercontent.com/DenverCoder1/Responsive-Birthday-Card/main/birthday.svg" alt="birthday" class="birthday">
-  <div class="text">
-    <h1>Happy Birthday!</h1>
-    <p>I hope you have a wonderful birthday</p>
-    <p class="muted">- Jonah Lawrence</p>
-  </div>
-  <div class="space"></div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday, Marvin! 🎂</title>
+  <link rel="stylesheet" href="main.css"/>
+  <style>
+    /* page-specific extras */
+    .page-wrap { gap: 0; padding-top: 3rem; padding-bottom: 3rem; }
+
+    .card-label {
+      font-family: 'Space Mono', monospace;
+      font-size: .7rem;
+      letter-spacing: .22em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      animation: fadeUp .6s both;
+    }
+
+    /* make the back face actually fill the front */
+    .card-scene { min-height: 420px; }
+    .card       { min-height: 420px; }
+    .card-front { min-height: 420px; display: flex; align-items: center; justify-content: center; }
+    .card-back  { min-height: 420px; }
+
+    /* age badge */
+    .age-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--coral);
+      color: #fff;
+      font-family: 'Abril Fatface', serif;
+      font-size: 1.3rem;
+      box-shadow: 0 0 30px rgba(255,107,107,.5);
+      animation: spinPop .6s .8s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes spinPop {
+      from { transform: scale(0) rotate(-180deg); opacity: 0; }
+      to   { transform: scale(1) rotate(0deg);    opacity: 1; }
+    }
+
+    .wish-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .4rem;
+      animation: fadeUp .8s .2s both;
+    }
+
+    .card-cta-row { margin-top: 1.8rem; }
+
+    /* bottom nav */
+    .nav-back {
+      margin-top: 2.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: .75rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: .1em;
+      transition: color .2s;
+      animation: fadeUp .8s 1.2s both;
+    }
+    .nav-back:hover { color: var(--gold); }
+
+    /* sparkle ring around cake on front */
+    .sparkle-ring {
+      position: relative;
+      display: inline-block;
+    }
+    .sparkle-ring::before {
+      content: '';
+      position: absolute;
+      inset: -12px;
+      border-radius: 50%;
+      border: 2px dashed rgba(245,200,66,.3);
+      animation: spin 8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+  <canvas id="stars"></canvas>
+
+  <!-- firework overlay -->
+  <div class="firework-stage" id="firework-stage"></div>
+
+  <main class="page-wrap">
+
+    <p class="card-label">✦ a very special delivery ✦</p>
+
+    <!-- THE CARD -->
+    <div class="card-scene">
+      <div class="card" id="bday-card" role="button" tabindex="0" aria-label="Click to open birthday card">
+
+        <!-- FRONT -->
+        <div class="card-face card-front">
+          <div class="card-front-inner">
+            <div class="confetti-strip" aria-hidden="true">🎊 🎈 🎉 🎈 🎊</div>
+
+            <div class="sparkle-ring">
+              <div class="card-cake">🎂</div>
+            </div>
+
+            <h1>Happy Birthday</h1>
+            <div class="card-front-name">Marvin</div>
+
+            <p class="card-tap-hint">[ tap to open ]</p>
+          </div>
+        </div>
+
+        <!-- BACK / INSIDE -->
+        <div class="card-face card-back">
+          <div class="card-back-balloons">🎈🎈🎈</div>
+
+          <p class="card-back-title">✨ Today is your day ✨</p>
+
+          <p class="card-back-message">
+            Hey Marvin — another lap around the sun, and you're still as brilliant as ever.<br/><br/>
+            May this birthday bring you everything you didn't know you needed:
+            <em>laughs that hurt, food that's too good, and moments you'll never forget.</em><br/><br/>
+            Here's to you — the legend, the myth, the <em>birthday royalty</em>. 🥳
+          </p>
+
+          <p class="card-back-sig">— With love &amp; cake crumbs 🎂</p>
+        </div>
+
+      </div><!-- /card -->
+    </div><!-- /scene -->
+
+    <!-- action buttons -->
+    <div class="card-cta-row">
+      <button class="btn-outline" id="music-btn">🎵 Play music</button>
+      <button class="btn-outline" id="fireworks-btn">🎆 More fireworks!</button>
+    </div>
+
+    <a class="nav-back" href="index.html">← Back to the 404</a>
+
+  </main>
+
+  <script src="main.js"></script>
+  <script>
+    // extra fireworks button
+    document.getElementById('fireworks-btn').addEventListener('click', () => {
+      const stage = document.getElementById('firework-stage');
+      launchFireworks(stage, 12);
+      confettiRain();
+    });
+  </script>
+</body>
+</html>
