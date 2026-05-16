@@ -244,13 +244,14 @@ background-color:#fafafa;
     display: none;
     width: 100%;
     background: #ffffff;
-    
-    /* CSS Grid forces identical matching heights for both sections */
-    display: grid;
+}
+
+/* Side-by-Side Folding Page Spread Panels via Grid */
+.card.active #opened {
+    display: grid !important;    /* Activates side-by-side grid spread layout */
     grid-template-columns: 1fr 1fr; 
 }
 
-/* Side-by-Side Folding Page Spread Panels */
 .left-panel {
     width: 100%;
     line-height: 0;
@@ -272,6 +273,7 @@ background-color:#fafafa;
     text-align: center;
     padding: 2.5rem;
     width: 100%;
+    height: auto;
     opacity: 0;
     transform: translateY(5px);
     transition: opacity 0.4s ease, transform 0.4s ease;
@@ -291,7 +293,7 @@ background-color:#fafafa;
     max-width: 95%;
     margin-bottom: 0;
     line-height: 1.6;
-}
+} delta
 
 /* Card Open Dynamic Modifiers */
 .card.active {
@@ -304,10 +306,6 @@ background-color:#fafafa;
 .card.active #closed {
     display: none !important;
 }
-
-.card.active #opened {
-    display: grid !important;    /* Activates side-by-side grid spread layout */
-} delta
 
 /* Reveal the text inside the panel strictly AFTER the card finishes expanding wide */
 .card.active .inner-content {
