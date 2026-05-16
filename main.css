@@ -1082,3 +1082,7 @@ background-color:#fafafa;
     opacity: 1;
     transform: translateY(0);
 }
+
+html, body {
+    overflow: auto !important;
+}
