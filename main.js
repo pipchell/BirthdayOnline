@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 // reveal text after 2 seconds
                 setTimeout(() => {
                     card.classList.add("show-text");
-                }, 2000);
+                }, 1000);
             }
         });
     }
