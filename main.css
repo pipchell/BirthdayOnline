@@ -188,42 +188,42 @@ background-color:#fafafa;
 
 
 /* =========================================
-   A4 GREETING CARD (DOUBLES WIDTH ON OPEN)
+   A4 GREETING CARD (STABLE UNFOLD SPREAD)
    ========================================= */
 
 .card {
     background: #ffffff;
     width: 100%;
-    max-width: 400px;            /* Closed: single A4 width dimension */
+    max-width: 400px;            /* Closed: standard width of one A4 panel */
     position: relative;
     
     /* Paper aesthetics */
     border: 1px solid rgba(0, 0, 0, 0.08); 
-    border-radius: 8px;          /* Clean paper-cut edging look */
+    border-radius: 6px;          /* Sharp, realistic paper-cut cardstock edge */
     
-    /* Layered premium paper shadows */
+    /* Premium paper depth drop shadows */
     box-shadow: 
         0 1px 3px rgba(0, 0, 0, 0.05),
-        0 10px 30px rgba(0, 0, 0, 0.05), 
-        0 20px 40px rgba(0, 0, 0, 0.02);
+        0 10px 30px rgba(0, 0, 0, 0.06), 
+        0 20px 40px rgba(0, 0, 0, 0.03);
     
     cursor: pointer;
     overflow: hidden;
     
-    /* Smooth width expansion transition */
+    /* Smooth width expansion transition on open */
     transition: 
         max-width 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
         transform 0.4s ease, 
         box-shadow 0.4s ease;
 }
 
-/* Card lift hover action when closed */
+/* Card hover lift actions (Only applies when card is closed) */
 .card:not(.active):hover {
     transform: translateY(-5px);
     box-shadow: 
         0 1px 2px rgba(0, 0, 0, 0.05),
-        0 20px 40px rgba(0, 0, 0, 0.10), 
-        0 30px 60px rgba(0, 0, 0, 0.04);
+        0 20px 40px rgba(0, 0, 0, 0.12), 
+        0 30px 60px rgba(0, 0, 0, 0.05);
 }
 
 #closed {
@@ -239,47 +239,60 @@ background-color:#fafafa;
     -webkit-user-drag: none;
 }
 
-/* Unfolded Wide Canvas Layout */
+/* Wide Open Canvas Mechanics */
 #opened {
     display: none;
     width: 100%;
-    /* Double wide proportions relative to landscape A4 orientation spreads */
-    aspect-ratio: 2 / 1.414;     
-    padding: 3rem;
+    height: auto;
     background: #ffffff;
 }
 
-.inner-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    text-align: center;
+/* Side-by-Side Folding Panels */
+.left-panel, 
+.right-panel {
+    width: 50%;
+    line-height: 0;
 }
 
-/* Interior Typography adjustments */
+/* Adds a subtle realistic inner shadow spine to the center fold */
+.right-panel {
+    border-left: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: inset 12px 0 20px rgba(0, 0, 0, 0.015);
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inner-content {
+    line-height: normal;
+    text-align: center;
+    padding: 2rem;
+    width: 100%;
+}
+
+/* Interior Typography Constraints */
 .card h1 {
-    font-size: clamp(2.4rem, 6vw, 3.8rem);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
     color: #5c5c5c;
     margin-bottom: 0.4em;
     font-weight: normal;
 }
 
 .card p {
-    font-size: 1.2rem;
+    font-size: clamp(0.9rem, 2vw, 1.15rem);
     color: #999999;
-    max-width: 85%;
+    max-width: 90%;
     margin-bottom: 0;
+    line-height: 1.6;
 }
 
-/* Unfolded State Mechanics */
+/* Unfolded Active States */
 .card.active {
-    max-width: 800px;            /* Exact double scale expansion spread */
+    max-width: 800px;            /* Smoothly doubles card size width */
     cursor: default;
     transform: none !important;
-    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.06);
 }
 
 .card.active #closed {
@@ -287,8 +300,8 @@ background-color:#fafafa;
 }
 
 .card.active #opened {
-    display: flex;
-    animation: fadeContentIn 0.4s ease forwards;
+    display: flex;                /* Aligns left-panel and right-panel side-by-side */
+    animation: fadeContentIn 0.5s ease forwards;
 }
 
 @keyframes fadeContentIn {
@@ -296,7 +309,7 @@ background-color:#fafafa;
     to { opacity: 1; }
 }
 
-/* Fixed Background Confetti styling */
+/* Fixed Background Canvas Confetti Elements */
 .particle {
     position: fixed;
     width: 8px;
@@ -306,16 +319,25 @@ background-color:#fafafa;
     z-index: 9999;
 }
 
-/* Mobile responsive handling */
-@media screen and (max-width: 840px) {
+/* Responsive constraints on mobile/tablet viewports */
+@media screen and (max-width: 768px) {
     #header {
         padding: 1rem;
     }
     .card.active {
-        max-width: 100%;
+        max-width: 400px;        /* Returns to single column flow if screen is too narrow */
     }
-    #opened {
-        aspect-ratio: auto;
-        min-height: 500px;
+    .card.active #opened {
+        flex-direction: column;  /* Stack pages vertically if screens are too compact */
+    }
+    .left-panel, 
+    .right-panel {
+        width: 100%;
+    }
+    .right-panel {
+        border-left: none;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        box-shadow: inset 0 12px 20px rgba(0, 0, 0, 0.015);
+        padding: 3rem 1rem;
     }
 }
