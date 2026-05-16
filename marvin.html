@@ -1,72 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width,initial-scale=1">
-
-<title>Happy Birthday</title>
-
-<link rel="icon" href="favicon.png">
-<link rel="stylesheet" href="main.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Marvin</title>
+    <link rel="icon" href="favicon.png">
+    <link rel="stylesheet" href="main.css">
 </head>
-
 <body>
 
 <section id="header">
+    <div class="content card">
+        <span class="tag">PRIVATE MESSAGE</span>
 
-<div class="content card">
+        <div id="closed">
+            <h1>For Marvin</h1>
+            <p>Click anywhere to open</p>
+        </div>
 
-<span class="tag">
-PRIVATE MESSAGE
-</span>
-
-
-<div id="closed">
-
-<h1>
-For Marvin
-</h1>
-
-<p>
-Click anywhere
-</p>
-
-</div>
-
-
-<div id="opened">
-
-<h1>
-Happy Birthday
-</h1>
-
-<p>
-
-Hope this year brings
-new projects,
-good memories,
-and everything you want.
-
-</p>
-
-<button
-onclick="celebrate(event)"
-class="button">
-
-Celebrate
-
-</button>
-
-</div>
-
-</div>
-
+        <div id="opened">
+            <h1>Happy Birthday!</h1>
+            <p>Hope this year brings new projects, good memories, and everything you want.</p>
+            <button onclick="celebrate(event)" class="button">Celebrate</button>
+        </div>
+    </div>
 </section>
 
 <script src="main.js"></script>
-
 </body>
 </html>
