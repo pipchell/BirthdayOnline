@@ -1,8 +1,44 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>There isn't a card here.</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>404 — Wrong Page? Or Maybe Not…</title>
+  <link rel="stylesheet" href="main.css"/>
 </head>
 <body>
-<h1>404</h1>
+
+  <!-- animated star field -->
+  <canvas id="stars"></canvas>
+
+  <!-- floating decorative emoji -->
+  <span class="deco-float" aria-hidden="true">🎈</span>
+  <span class="deco-float" aria-hidden="true">✨</span>
+  <span class="deco-float" aria-hidden="true">🎉</span>
+  <span class="deco-float" aria-hidden="true">🌟</span>
+  <span class="deco-float" aria-hidden="true">🎊</span>
+
+  <main class="page-wrap">
+
+    <!-- glitchy 404 -->
+    <div class="glitch-wrap">
+      <span class="glitch" data-text="404">404</span>
+    </div>
+
+    <p class="index-subtitle">Error: destination not found &nbsp;/&nbsp; or is it?</p>
+
+    <p class="index-message">
+      Hmm, this page doesn't seem to exist…<br/>
+      <strong>Unless</strong> you were looking for something a little more special.<br/>
+      A certain someone might have left a surprise just around the corner.
+    </p>
+
+    <a class="btn-portal" href="marvin.html">
+      Open the surprise <span class="arrow">→</span>
+    </a>
+
+  </main>
+
+  <script src="main.js"></script>
 </body>
 </html>
