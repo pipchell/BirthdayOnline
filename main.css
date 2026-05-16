@@ -1,54 +1,71 @@
 @import url(fontawesome-all.min.css);
 
-/* RESET */
+/* =========================
+   RESET
+   ========================= */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* SCROLL FIX */
+/* =========================
+   GLOBAL FIX (iOS SAFE)
+   ========================= */
 html, body {
-    height: auto;
+    height: 100%;
     min-height: 100%;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-text-size-adjust: 100%;
 }
 
-/* BODY */
 body {
     background: #fff;
     font-family: Arial, Helvetica, sans-serif;
     color: #999;
     font-size: 16pt;
+    margin: 0;
 }
 
-/* TOP TEXT ("click to open") */
+/* =========================
+   TOP TEXT
+   ========================= */
 p {
     text-align: center;
     margin-top: 20px;
     margin-bottom: 10px;
 }
 
-/* CENTER AREA */
+/* =========================
+   LAYOUT CONTAINER
+   ========================= */
 #header {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
+    min-height: 100dvh; /* iOS-safe viewport */
+    display: block;     /* avoids flex tap issues */
+    padding: 2rem 1rem;
 }
 
-/* CARD */
+/* =========================
+   CARD (TOUCH SAFE)
+   ========================= */
 .card {
     background: #fff;
     width: 100%;
     max-width: 450px;
+    margin: 0 auto;
+
     border: 1px solid rgba(0,0,0,0.08);
     border-radius: 6px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    overflow: hidden;
+
     cursor: pointer;
+    overflow: hidden;
+
+    /* mobile stability */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+
     transition: max-width 0.5s ease, transform 0.4s ease;
 }
 
@@ -73,7 +90,7 @@ p {
     object-fit: contain;
 }
 
-/* FADE OUT ON OPEN */
+/* FADE OUT CLOSED */
 .card.active #closed {
     opacity: 0;
     transform: scale(0.98);
@@ -100,7 +117,9 @@ p {
     to { opacity: 1; }
 }
 
-/* PANELS */
+/* =========================
+   PANELS
+   ========================= */
 .left-panel,
 .right-panel {
     width: 50%;
@@ -131,17 +150,19 @@ p {
     background: #fff;
 }
 
-/* TEXT */
+/* =========================
+   TEXT
+   ========================= */
 .inner-content {
     text-align: center;
     padding: 20px;
 
     opacity: 0;
     transform: translateY(10px);
-    transition: 0.6s ease;
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* SHOW TEXT AFTER DELAY */
+/* DELAYED REVEAL */
 .card.active.show-text .inner-content {
     opacity: 1;
     transform: translateY(0);
@@ -168,7 +189,6 @@ p {
 
     #header {
         padding: 1rem;
-        align-items: center;
     }
 
     .card {
