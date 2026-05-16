@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (card) {
         card.addEventListener("click", () => {
+            // Confirm the card state safely to trigger loop transitions once
             if (!card.classList.contains("active")) {
                 card.classList.add("active");
                 celebrate();
@@ -16,14 +17,17 @@ function celebrate() {
         let p = document.createElement("div");
         p.className = "particle";
 
+        // Modern celebratory color mix
         const colors = ['#4696e5', '#ff6b6b', '#feca57', '#1dd1a1', '#ff9ff3', '#54a0ff'];
         p.style.background = colors[Math.floor(Math.random() * colors.length)];
 
+        // Force background center coordinates tracker anchors
         p.style.left = "50%";
         p.style.top = "50%";
 
         document.body.appendChild(p);
 
+        // Calculate dispersal dimensions relative to current screen space sizes
         let x = (Math.random() - 0.5) * window.innerWidth * 1.4;
         let y = (Math.random() - 0.5) * window.innerHeight * 1.4;
 
