@@ -46,7 +46,7 @@ function celebrate() {
 
                 celebrate();
 
-                // reveal text after 2 seconds
+
                 setTimeout(() => {
                     card.classList.add("show-text");
                 }, 1000);
