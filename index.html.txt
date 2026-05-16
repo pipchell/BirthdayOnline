@@ -1,0 +1,8 @@
+<html>
+<head>
+<title>There isn't a card here.</title>
+</head>
+<body>
+<h1>404</h1>
+</body>
+</html>

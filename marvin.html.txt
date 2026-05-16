@@ -1,0 +1,9 @@
+<div class="card">
+  <img src="https://raw.githubusercontent.com/DenverCoder1/Responsive-Birthday-Card/main/birthday.svg" alt="birthday" class="birthday">
+  <div class="text">
+    <h1>Happy Birthday!</h1>
+    <p>I hope you have a wonderful birthday</p>
+    <p class="muted">- Jonah Lawrence</p>
+  </div>
+  <div class="space"></div>
+</div>
