@@ -11,7 +11,7 @@
 
 ## Step Two:
 - Upload your icon (favicon) to /user/user-favicon
-- Uplpad your A4 image to /user/user-img
+- Upload your A4 image to /user/user-img
 
 You can also put these files at root.
 
