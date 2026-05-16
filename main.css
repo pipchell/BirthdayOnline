@@ -7,7 +7,7 @@
     box-sizing: border-box;
 }
 
-/* SCROLL */
+/* SCROLL FIX */
 html, body {
     height: auto;
     min-height: 100%;
@@ -23,7 +23,13 @@ body {
     font-size: 16pt;
 }
 
-/* CENTER */
+/* TOP TEXT */
+p {
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* CENTER LAYOUT */
 #header {
     min-height: 100vh;
     display: flex;
@@ -42,19 +48,21 @@ body {
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     overflow: hidden;
     cursor: pointer;
+    transition: max-width 0.5s ease, transform 0.4s ease;
 }
 
-/* EXPAND ONLY SIZE */
+/* EXPAND ON OPEN */
 .card.active {
     max-width: 900px;
 }
 
 /* =========================
-   CLOSED STATE (FIX)
+   CLOSED (FRONT IMAGE)
    ========================= */
 #closed {
     width: 100%;
     display: block;
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 #closed img {
@@ -64,16 +72,17 @@ body {
     object-fit: contain;
 }
 
-/* IMPORTANT: FORCE HIDE */
+/* FADE OUT ON OPEN */
 .card.active #closed {
-    display: none !important;
-    visibility: hidden !important;
-    height: 0 !important;
-    overflow: hidden !important;
+    opacity: 0;
+    transform: scale(0.98);
+    pointer-events: none;
+    height: 0;
+    overflow: hidden;
 }
 
 /* =========================
-   OPEN STATE
+   OPEN AREA
    ========================= */
 #opened {
     display: none;
@@ -82,6 +91,12 @@ body {
 
 .card.active #opened {
     display: flex;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 /* PANELS */
@@ -90,7 +105,7 @@ body {
     width: 50%;
 }
 
-/* LEFT IMAGE */
+/* LEFT IMAGE INSIDE */
 .left-panel {
     display: flex;
     align-items: center;
@@ -125,7 +140,7 @@ body {
     transition: 0.6s ease;
 }
 
-/* SHOW TEXT */
+/* SHOW TEXT AFTER DELAY */
 .card.active.show-text .inner-content {
     opacity: 1;
     transform: translateY(0);
@@ -145,11 +160,22 @@ body {
     line-height: 1.6;
 }
 
-/* MOBILE */
+/* =========================
+   MOBILE RESPONSIVE FIX
+   ========================= */
 @media (max-width: 768px) {
+
     #header {
-        flex-direction: column;
         padding: 1rem;
+        align-items: center;
+    }
+
+    .card {
+        max-width: 100%;
+    }
+
+    .card.active {
+        max-width: 100%;
     }
 
     .card.active #opened {
@@ -165,5 +191,21 @@ body {
         border-left: none;
         border-top: 1px solid rgba(0,0,0,0.1);
         padding: 2rem 1rem;
+    }
+
+    .left-panel img {
+        max-height: 250px;
+    }
+
+    .inner-content {
+        padding: 15px;
+    }
+
+    .card h1 {
+        font-size: 1.6rem;
+    }
+
+    .card p {
+        font-size: 0.95rem;
     }
 }
