@@ -23,13 +23,14 @@ body {
     font-size: 16pt;
 }
 
-/* TOP TEXT */
+/* TOP TEXT ("click to open") */
 p {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
-/* CENTER LAYOUT */
+/* CENTER AREA */
 #header {
     min-height: 100vh;
     display: flex;
@@ -57,7 +58,7 @@ p {
 }
 
 /* =========================
-   CLOSED (FRONT IMAGE)
+   CLOSED STATE (FRONT IMAGE)
    ========================= */
 #closed {
     width: 100%;
@@ -82,7 +83,7 @@ p {
 }
 
 /* =========================
-   OPEN AREA
+   OPEN STATE
    ========================= */
 #opened {
     display: none;
@@ -105,7 +106,7 @@ p {
     width: 50%;
 }
 
-/* LEFT IMAGE INSIDE */
+/* LEFT IMAGE */
 .left-panel {
     display: flex;
     align-items: center;
@@ -161,7 +162,7 @@ p {
 }
 
 /* =========================
-   MOBILE RESPONSIVE FIX
+   MOBILE FIX
    ========================= */
 @media (max-width: 768px) {
 
@@ -194,7 +195,7 @@ p {
     }
 
     .left-panel img {
-        max-height: 250px;
+        max-height: 220px;
     }
 
     .inner-content {
