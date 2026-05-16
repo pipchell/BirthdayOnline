@@ -1,10 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Select using class targeted cleanly to map against template changes
     let card = document.querySelector(".card");
 
     if (card) {
         card.addEventListener("click", () => {
-            // Guard conditions ensure the execution loop fires strictly once
             if (!card.classList.contains("active")) {
                 card.classList.add("active");
                 celebrate();
@@ -18,17 +16,14 @@ function celebrate() {
         let p = document.createElement("div");
         p.className = "particle";
 
-        // Modern celebratory color palette mix
         const colors = ['#4696e5', '#ff6b6b', '#feca57', '#1dd1a1', '#ff9ff3', '#54a0ff'];
         p.style.background = colors[Math.floor(Math.random() * colors.length)];
 
-        // Position tracking anchors cleanly from screen center space
         p.style.left = "50%";
         p.style.top = "50%";
 
         document.body.appendChild(p);
 
-        // Scatter direction dispersion ranges
         let x = (Math.random() - 0.5) * window.innerWidth * 1.4;
         let y = (Math.random() - 0.5) * window.innerHeight * 1.4;
 
