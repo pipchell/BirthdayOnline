@@ -194,7 +194,7 @@ background-color:#fafafa;
 .card {
     background: #ffffff;
     width: 100%;
-    max-width: 400px;            /* Closed single A4 cover layout panel width */
+    max-width: 400px;            /* Closed single A4 cover panel width */
     position: relative;
     
     /* Paper stock styling */
@@ -237,31 +237,30 @@ background-color:#fafafa;
     display: block;
     user-select: none;
     -webkit-user-drag: none;
-}
+} delta
 
 /* Wide Open Canvas Mechanics */
 #opened {
     display: none;
     width: 100%;
-    height: auto;
     background: #ffffff;
-} delta
+    align-items: stretch;        /* Forces both halves to strictly match heights */
+}
 
 /* Side-by-Side Folding Page Spread Panels */
-.left-panel, 
-.right-panel {
+.left-panel {
     width: 50%;
     line-height: 0;
 }
 
-/* Adds a spine crease shadow down the open center axis */
 .right-panel {
+    width: 50%;
     border-left: 1px solid rgba(0, 0, 0, 0.06);
     box-shadow: inset 15px 0 25px rgba(0, 0, 0, 0.015);
     background: #ffffff;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: center;         /* Vertically centers greeting content */
+    justify-content: center;     /* Horizontally centers greeting content */
 }
 
 /* Hidden by default until the parent card is fully expanded */
@@ -273,7 +272,6 @@ background-color:#fafafa;
     opacity: 0;
     transform: translateY(5px);
     transition: opacity 0.4s ease, transform 0.4s ease;
-    transition-delay: 0s;        /* Reset transition delay when closed */
 }
 
 /* Typography styles matching the template constraints safely */
@@ -312,7 +310,7 @@ background-color:#fafafa;
 .card.active .inner-content {
     opacity: 1;
     transform: translateY(0);
-    transition-delay: 0.35s;     /* Delays text until physical expansion layout is settled */
+    transition-delay: 0.45s;     /* Delays text until physical expansion layout is settled */
 }
 
 /* Isolated Fixed Screen Confetti Particles styling */
@@ -345,8 +343,5 @@ background-color:#fafafa;
         border-top: 1px solid rgba(0, 0, 0, 0.06);
         box-shadow: inset 0 15px 25px rgba(0, 0, 0, 0.015);
         padding: 3.5rem 1rem;
-    }
-    .card.active .inner-content {
-        transition-delay: 0.2s;  /* Shorter transition time window constraint on small displays */
     }
 }
