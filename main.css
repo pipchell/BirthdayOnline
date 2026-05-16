@@ -188,65 +188,88 @@ background-color:#fafafa;
 
 
 /* =========================================
-   REAL PHYSICAL CARD STYLING
+   REAL PHYSICAL PAPER CARD STYLING
    ========================================= */
 
 .card {
     background: #ffffff;
     width: 100%;
-    max-width: 440px;            /* Standard greeting card proportion (portrait) */
-    min-height: 560px;           /* Gives it a physical height shape */
-    padding: 3.5rem 2.5rem;
-    text-align: center;
+    max-width: 440px;            /* Standard portrait greeting card width */
+    height: 580px;               /* Fixed container height to prevent shifting */
+    position: relative;
     
     /* Paper aesthetics */
-    border: 1px solid #eaeaea; 
-    border-radius: 12px;         /* Smooth premium corners */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.06); 
+    border-radius: 14px;         /* Smooth premium cut cardstock corners */
     
-    /* Center text structure inside the card */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    /* Multi-layered shadows to mimic ambient occlusion on real paper */
+    box-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.05),
+        0 10px 30px rgba(0, 0, 0, 0.06), 
+        0 20px 50px rgba(0, 0, 0, 0.04);
     
     cursor: pointer;
     transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+    overflow: hidden;            /* Ensures front image perfectly adheres to borders */
 }
 
+/* Hover lift effect for the physical card container */
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.07), 0 4px 12px rgba(0, 0, 0, 0.03);
+    transform: translateY(-6px);
+    box-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.05),
+        0 20px 45px rgba(0, 0, 0, 0.10), 
+        0 30px 70px rgba(0, 0, 0, 0.06);
 }
 
-/* Adjust card titles to look elegant inside the layout box */
+/* Cover / Front Image configurations */
+#closed {
+    width: 100%;
+    height: 100%;
+}
+
+.card-front-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;           /* Ensures your artwork fills the cover space seamlessly */
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+/* Inside Card Content Configurations */
+#opened {
+    display: none;
+    width: 100%;
+    height: 100%;
+    padding: 3.5rem 2.5rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: #ffffff;
+}
+
+/* Adjust inside titles to look hand-crafted and elegant */
 .card h1 {
-    font-size: clamp(2.5rem, 7vw, 3.8rem);
-    color: #666;
-    margin-bottom: 0.4em;
+    font-size: clamp(2.4rem, 7vw, 3.6rem);
+    color: #555555;
+    margin-bottom: 0.5em;
+    font-weight: normal;
 }
 
 .card p {
     font-size: 1.15rem;
-    color: #999;
-    max-width: 90%;
-    margin-bottom: 2rem;
+    color: #8c8c8c;
+    max-width: 95%;
+    margin-bottom: 2.5rem;
 }
 
-/* Open states and smooth reveal animation */
-#opened {
-    display: none;
-    width: 100%;
-}
-
-#closed {
-    width: 100%;
-}
-
+/* Open transitions and reveal sequences */
 .card.active {
     cursor: default;
     transform: none;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05); /* Soft lock down shadow */
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.05); /* Settles back down gently when open */
 }
 
 .card.active #closed {
@@ -255,20 +278,17 @@ background-color:#fafafa;
 
 .card.active #opened {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    animation: revealCardContent 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation: revealPaperContent 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
-@keyframes revealCardContent {
+@keyframes revealPaperContent {
     from {
         opacity: 0;
-        transform: scale(0.95) translateY(10px);
+        transform: scale(0.97);
     }
     to {
         opacity: 1;
-        transform: scale(1) translateY(0);
+        transform: scale(1);
     }
 }
 
@@ -280,416 +300,4 @@ background-color:#fafafa;
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
-}@import url(fontawesome-all.min.css);
-
-#header {
-    padding-top: 0;
-}
-
-html, body, div, span, applet, object,
-iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
-pre, a, abbr, acronym, address, big, cite,
-code, del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var, b,
-u, i, center, dl, dt, dd, ol, ul, li, fieldset,
-form, label, legend, table, caption, tbody,
-tfoot, thead, tr, th, td, article, aside,
-canvas, details, embed, figure, figcaption,
-footer, header, hgroup, menu, nav, output, ruby,
-section, summary, time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-}
-
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-    display: block;
-}
-
-#header {
-    min-height: 100vh;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-}
-
-/* Fix spotlight for courses */
-#courses .spotlight {
-    display: block !important;
-    text-align: center !important;
-}
-
-#courses .spotlight .content {
-    width: 100% !important;
-    margin: 0 auto !important;
-}
-
-ol, ul {
-    list-style: none;
-}
-
-blockquote, q {
-    quotes: none;
-}
-
-blockquote:before, blockquote:after, q:before, q:after {
-    content: '';
-    content: none;
-}
-
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
-body {
-    -webkit-text-size-adjust: none;
-}
-
-mark {
-    background-color: transparent;
-    color: inherit;
-}
-
-input::-moz-focus-inner {
-    border: 0;
-    padding: 0;
-}
-
-input, select, textarea {
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    -ms-appearance: none;
-    appearance: none;
-}
-
-/* Basic */
-
-@-ms-viewport {
-    width: device-width;
-}
-
-body {
-    -ms-overflow-style: scrollbar;
-}
-
-@media screen and (max-width: 360px) {
-    html, body {
-        min-width: 320px;
-    }
-}
-
-html {
-    box-sizing: border-box;
-}
-
-*, *:before, *:after {
-    box-sizing: inherit;
-}
-
-body {
-    background: #ffffff;
-}
-
-body.is-preload *, body.is-preload *:before, body.is-preload *:after {
-    -moz-animation: none !important;
-    -webkit-animation: none !important;
-    -ms-animation: none !important;
-    animation: none !important;
-    -moz-transition: none !important;
-    -webkit-transition: none !important;
-    -ms-transition: none !important;
-    transition: none !important;
-}
-
-/* Type */
-
-body {
-    color: #999999;
-}
-
-html, input, select, textarea {
-    font-size: 16pt;
-}
-
-@media screen and (max-width: 1680px) {
-    html, input, select, textarea {
-        font-size: 13pt;
-    }
-}
-
-@media screen and (max-width: 1280px) {
-    html, input, select, textarea {
-        font-size: 12pt;
-    }
-}
-
-@media screen and (max-width: 360px) {
-    html, input, select, textarea {
-        font-size: 11pt;
-    }
-}
-
-body, input, select, textarea {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: normal;
-    line-height: 1.5em;
-    letter-spacing: -0.015em;
-}
-
-a {
-    -moz-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
-    -webkit-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
-    -ms-transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
-    transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
-    text-decoration: none;
-    border-bottom: dotted 1px;
-}
-
-a:hover {
-    border-bottom-color: transparent !important;
-}
-
-strong, b {
-    font-weight: bold;
-}
-
-em, i {
-    font-style: italic;
-}
-
-p {
-    margin: 0 0 2em 0;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-weight: normal;
-    line-height: 1em;
-    margin: 0 0 1em 0;
-    letter-spacing: -0.0125em;
-}
-
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
-    color: inherit;
-    text-decoration: none;
-    border-bottom: none;
-}
-
-@media screen and (max-width: 980px) {
-    h1 br, h2 br, h3 br, h4 br, h5 br, h6 br {
-        display: none;
-    }
-}
-
-h2 { font-size: 1.75em; line-height: 1.5em; }
-h3 { font-size: 1.5em; line-height: 1.5em; }
-h4 { font-size: 1.1em; line-height: 1.5em; }
-h5 { font-size: 0.9em; line-height: 1.5em; }
-h6 { font-size: 0.7em; line-height: 1.5em; }
-
-@media screen and (max-width: 736px) {
-    h2 { font-size: 1.25em; }
-    h3 { font-size: 1.2em; }
-    h4 { font-size: 1em; }
-}
-
-sub { font-size: 0.8em; position: relative; top: 0.5em; }
-sup { font-size: 0.8em; position: relative; top: -0.5em; }
-
-blockquote {
-    border-left-style: solid;
-    border-left-width: 4px;
-    font-style: italic;
-    margin: 0 0 2em 0;
-    padding: 0.5em 0 0.5em 2em;
-}
-
-code {
-    border-radius: 6px;
-    border-style: solid;
-    border-width: 1px;
-    font-family: "Courier New", monospace;
-    font-size: 0.9em;
-    margin: 0 0.25em;
-    padding: 0.25em 0.65em;
-}
-
-pre {
-    -webkit-overflow-scrolling: touch;
-    font-family: "Courier New", monospace;
-    font-size: 0.9em;
-    margin: 0 0 2em 0;
-}
-
-pre code {
-    display: block;
-    line-height: 1.75em;
-    padding: 1em 1.5em;
-    overflow-x: auto;
-}
-
-hr {
-    border: 0;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    margin: 2em 0;
-}
-
-hr.major {
-    margin: 3em 0;
-}
-
-.align-left { text-align: left; }
-.align-center { text-align: center; }
-.align-right { text-align: right; }
-
-input, select, textarea {
-    color: #999999;
-}
-
-a {
-    color: inherit;
-    border-bottom-color: #d6d6d6;
-}
-
-a:hover {
-    color: #4696e5;
-}
-
-strong, b { color: #828282; }
-h1, h2, h3, h4, h5, h6 { color: #828282; }
-blockquote { border-left-color: #e6e6e6; }
-code { background: rgba(144, 144, 144, 0.075); border-color: #e6e6e6; }
-hr { border-bottom-color: #e6e6e6; }
-
-/* =========================================
-   CARD & UI STYLING 
-   (Appended below your framework)
-   ========================================= */
-
-.content {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-/* Make it look like a portrait greeting card */
-.card {
-    background: #ffffff;
-    width: 100%;
-    max-width: 420px;          /* Portrait constraints */
-    min-height: 550px;         /* Standard card height */
-    margin: 0 auto;
-    padding: 3rem 2rem;
-    
-    /* Paper aesthetics */
-    border: 1px solid #e6e6e6; 
-    border-radius: 8px;        /* Very slight rounding like cut cardstock */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05), 0 2px 5px rgba(0, 0, 0, 0.02);
-    
-    /* Content centering */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.03);
-}
-
-.tag {
-    display: inline-block;
-    padding: 0.6rem 1rem;
-    border: 1px solid #e6e6e6;
-    border-radius: 999px;
-    font-size: 0.7rem;
-    letter-spacing: 0.3em;
-    margin-bottom: 2rem;
-    color: #999;
-}
-
-/* Oversized typography specifically for the card */
-.card h1 {
-    font-size: clamp(3rem, 8vw, 4.5rem);
-    color: #555;
-    margin-bottom: 0.25em;
-    line-height: 1;
-}
-
-.card p {
-    margin: 0 auto 2rem;
-    max-width: 90%;
-    line-height: 1.8;
-}
-
-.button {
-    display: inline-block;
-    padding: 1rem 2rem;
-    border: 1px solid #e6e6e6;
-    border-radius: 999px;
-    background: white;
-    cursor: pointer;
-    transition: all 0.3s;
-    color: inherit;
-    text-decoration: none;
-    font-size: 16pt; /* Match input font size */
-}
-
-.button:hover {
-    color: #4696e5;
-    border-color: #4696e5;
-    transform: translateY(-2px);
-}
-
-/* Card Interaction States */
-#opened {
-    display: none;
-}
-
-.card.active {
-    cursor: default;
-    transform: none; /* Stops it from popping up when hovering while open */
-}
-
-.card.active #opened {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    animation: fade 0.7s forwards;
-}
-
-.card.active #closed {
-    display: none;
-}
-
-@keyframes fade {
-    from {
-        opacity: 0;
-        transform: translateY(25px);
-    }
-    to {
-        opacity: 1;
-        transform: none;
-    }
-}
-
-/* Confetti */
-.particle {
-    position: fixed;
-    width: 6px;
-    height: 6px;
-    background: #4696e5;
-    border-radius: 100%;
-    pointer-events: none;
-    z-index: 999;
 }
