@@ -1,4 +1,4 @@
-# Adding a card:
+# Adding a card
 
 ## Step Zero:
 - Click Use this template
